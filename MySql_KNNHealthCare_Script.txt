@@ -1,0 +1,127 @@
+DROP DATABASE `knnhealthcare`;
+CREATE SCHEMA `knnhealthcare` ;
+use knnhealthcare;
+
+DROP TABLE `knnhealthcare`.`registration`;
+create table Registration(
+username varchar(100),
+password varchar(100),
+repassword varchar(100),
+emailId varchar(100),
+usertype varchar(40)
+);
+
+DROP TABLE `knnhealthcare`.`doctors_visiting_details`;
+DROP TABLE `knnhealthcare`.`doctor_details`;
+create table doctor_details(
+Id varchar(100),
+Name varchar(100),
+speciality varchar(100),
+doctorImage varchar(100),
+gender varchar(50),
+languages varchar (500),
+emailId varchar(100),
+contactNumber_1 varchar(20),
+contactNumber_2 varchar(20),
+qualification varchar(1000),
+doctorDescription varchar(9999),
+yearsInPractice varchar(100),
+visitingPrice double,
+primary key (Id,Name)
+);
+
+create table doctors_visiting_details
+(
+	visitingId integer,
+    Id varchar(100),
+    Name varchar(100),
+    visitingDay varchar(500),
+	primary key (visitingId,Name),
+	FOREIGN KEY (Id,Name) REFERENCES doctor_details(Id,Name)
+);
+
+DROP TABLE `knnhealthcare`.`temp_table`;
+DROP TABLE `knnhealthcare`.`medicine_details`;
+create table medicine_details(
+Id varchar(100),
+productName varchar(100),
+productType varchar(100),
+productPrice double,
+productImage varchar(100),
+productManufacturer varchar(100),
+manufactureDate varchar(100),
+bestBeforeDate varchar(100),
+description varchar(1000),
+discount double,
+originalProductquantity integer,
+soldProductQuantity integer,
+availableProductQuantity integer,
+manufacturerRebate double,
+primary key (Id)
+);
+
+DROP TABLE `knnhealthcare`.`customer_orders`;
+create table customer_orders(
+orderId integer,
+customertName varchar(40),
+orderName varchar(100),
+orderOriginalPrice double,
+orderDiscount double,
+orderManufecturarRebate double,
+quantityOrderd integer,
+orderPayablePrice double,
+customerAddress varchar (500),
+creditCardNo varchar(400),
+creditCardName varchar(400),
+creditCardExpiry varchar(100),
+creditCardCVV varchar(100),
+orderDate varchar(100),
+deliveryDate varchar(100),
+orderStatus varchar(100),
+primary key (orderId,customertName,orderName)
+);
+
+create table temp_table(
+productName varchar(100),
+quantity integer
+);
+
+DROP TABLE `knnhealthcare`.`book_appointment`;
+create table book_appointment(
+appointmentId varchar(100),
+userName varchar(100),
+doctorName varchar(100),
+doctorVisitingDay varchar(100),
+visitingDate varchar(100),
+fixAppointmentDate varchar(100),
+appointmentStatus varchar(100),
+primary key (appointmentId)
+);
+
+DROP TABLE `knnhealthcare`.`patient_prescription`;
+create table patient_prescription(
+prescriptionId integer,
+patientName varchar(100),
+doctorName varchar(100),
+natureOfIllness varchar(300),
+medicinePrescription varchar(1000),
+additionalNotes varchar(1000),
+prescriptionDate varchar(100),
+primary key (prescriptionId)
+);
+
+select * from Registration;
+
+select * from doctor_details;
+
+select * from doctors_visiting_details;
+
+select * from medicine_details;
+
+select * from customer_orders;
+
+select * from temp_table;
+
+select * from book_appointment;
+
+select * from patient_prescription;
